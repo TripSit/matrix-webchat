@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import WebUsers from '../models/WebUsers';
 
+// TODO: Use express async handler!
 export const login_get = async(req, res, next) => {
 	//...
 };

@@ -1,6 +1,7 @@
 import {Knex,knex} from 'knex';
 import { WebUser } from '../@types/WebUser';
 import { WebTicket } from '../@types/WebTicket';
+import WebUsers from '../models/webUsers';
 export class DatabaseService {
 	private db:Knex;
 
@@ -16,8 +17,7 @@ export class DatabaseService {
 		});
 	}
 
-
-	/**
+	/**new 
 	 * Get all Webchat-users
 	 * 
 	 * @returns WebUser[] | undefined
