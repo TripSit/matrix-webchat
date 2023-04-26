@@ -1,8 +1,8 @@
 import WebUsers from './models/webUsers';
-import { DatabaseService } from './services/databaseService';
+import { databaseService } from './services/databaseService';
 import * as dotenv from 'dotenv';
 dotenv.config();
-const db = new DatabaseService;
+const db = new databaseService;
 
 
 

@@ -1,8 +1,7 @@
 import {Knex,knex} from 'knex';
 import { WebUser } from '../@types/WebUser';
 import { WebTicket } from '../@types/WebTicket';
-import WebUsers from '../models/webUsers';
-export class DatabaseService {
+export class databaseService {
 	private db:Knex;
 
 	constructor() {

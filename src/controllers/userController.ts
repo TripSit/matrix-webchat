@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import WebUsers from '../models/WebUsers';
+import expressAsyncHandler from 'express-async-handler';
 
 // TODO: Use express async handler!
-export const login_get = async(req, res, next) => {
-	//...
-};
+export const login_get = expressAsyncHandler(async(req, res):Promise<void> => {
+	// ...
+});
 
-export const login_post = async(req, res, next) =>  {
-	const user = new WebUsers(req.body.username);
-};
+export const login_post = expressAsyncHandler(async(req, res):Promise<void> => {
+	// ...
+});
+

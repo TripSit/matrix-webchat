@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios';
-import { getRoom } from '../services/matrixService';
-import { DatabaseService } from '../services/databaseService';
+import { databaseService } from '../services/databaseService';
+import { WebTicket } from '../@types/WebTicket';
+import { matrixService } from '../services/matrixService';
 export default class WebTickets {
-	db: DatabaseService;
+	db: databaseService;
+	matrix: matrixService;
 
 	constructor() {
-		this.db = new DatabaseService();
+		this.db = new databaseService();
+		this.matrix = new matrixService();
 	}
 
 	public async getById(id:string) {
-		const roomData = await getRoom(id);
+		const roomData = await this.matrix.getRoom(id);
 		console.log(roomData);
 	}
 
@@ -18,8 +21,16 @@ export default class WebTickets {
 		return (await this.db.getWebTicketByUuid(userID))?.matrix_roomId;
 	}
 
-	public static async create(username:string)  {
-		// ...
+	public async create(username:string, triage:string, intro:string)  {
+		const ticketData = {} as WebTicket;
+
+		const user = await this.db.getWebUserByUsername(username);
+		if(user === undefined) return false;
+		ticketData.userId = user.id;
+		const roomId = await this.matrix.createRoom(user, triage, intro);
+		ticketData.matrix_roomId = roomId;
+
+
 	}
     
 }
