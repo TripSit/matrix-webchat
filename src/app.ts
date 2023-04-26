@@ -1,23 +1,18 @@
-import WebUsers from './models/webUsers';
-import { databaseService } from './services/databaseService';
-import * as dotenv from 'dotenv';
-dotenv.config();
-const db = new databaseService;
+import express from 'express';
+import ticket_router  from './routes/ticket';
+import index_router from './routes/index';
+import user_router from './routes/user';
 
+import { config } from 'dotenv';
 
+config();
 
-async function run() {
-	console.log('testing app');
-	let username = 'test';
+const app = express();
 
-	if(await db.getWebUserByUsername(username) !== undefined) {
-		console.log(`User with name '${username} already exists in database. Appeding a '1' to the username.`);
-		username = `${username}1`;
-	}
-	const user = new WebUsers(username);
-	await user.save();
-	const uData = await user.get();
-	console.log(uData);
-}
+app.use('/ticket', ticket_router);
+app.use('/', index_router);
 
-run();
+app.listen(process.env.HTTP_PORT, () => {
+	console.log(`Server listening on ${process.env.HTTP_PORT}`);
+	console.log(process.env);
+});
