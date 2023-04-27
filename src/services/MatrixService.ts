@@ -4,6 +4,12 @@ import { WebUser } from '../@types/WebUser';
 
 export class matrixService {
 
+	/**
+	 * 
+	 * 
+	 * @param {string} roomId 
+	 * @returns 
+	 */
 	public async getRoom(roomId:string) {
 		const baseUrl = `${process.env.MATRIX_HOMESERVER_URL}/_matrix/client/r0`;
 		const url = `${baseUrl}/rooms/${roomId}?access_token=${process.env.MATRIX_ACCESS_TOKEN}`;
@@ -15,14 +21,15 @@ export class matrixService {
 		}
 	}
 
+
 	/**
- * creates the room and invites the helperteam 
- * 
- * @param user 
- * @param triage 
- * @param intro 
- * @returns string roomId
- */
+	* creates the room and invites the helperteam 
+ 	* 
+	* @param user 
+	* @param triage 
+	* @param intro 
+	* @returns string roomId
+	*/
 	public async createRoom(user:WebUser, triage:string, intro:string):Promise<string|undefined> {
 		try {
 			const response = await axios.post(`${process.env.TRIPBOT_API_BASEURL}/api/createTicket`, {

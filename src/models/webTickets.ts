@@ -21,7 +21,7 @@ export default class WebTickets {
 		return (await this.db.getWebTicketByUuid(userID))?.matrix_roomId;
 	}
 
-	public async create(username:string, triage:string, intro:string)  {
+	public async create(username:string, triage:string, intro:string):Promise  {
 		const ticketData = {} as WebTicket;
 
 		const user = await this.db.getWebUserByUsername(username);
@@ -29,7 +29,7 @@ export default class WebTickets {
 		ticketData.userId = user.id;
 		const roomId = await this.matrix.createRoom(user, triage, intro);
 		ticketData.matrix_roomId = roomId;
-
+		this.db.createWebTicket(ticketData);
 
 	}
     

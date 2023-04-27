@@ -7,13 +7,20 @@ export default class WebUsers {
 	db: databaseService;
 
 	constructor(username?:string) {
-		if(username) {
-			this.id = uuidv4();
-		}
 		this.username = username;
 		this.db = new databaseService();
 
 	}
+
+	public async initialize():Promise<void> {
+		if(await this.findByUsername(this.username as string) !== undefined) {
+			this.id = (await this.findByUsername(this.username as string))?.id;
+		} else {
+			this.id = uuidv4();
+			this.save();
+		}
+	}
+
 	public async get():Promise<WebUser | undefined> {
 		return await this.db.getWebUser(this.id as string);
 	}
