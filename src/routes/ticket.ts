@@ -9,6 +9,6 @@ router.get('/', (req, res) => {
 
 router.get('/new', ticket_controller.create_get);
 
-router.post('/newe', ticket_controller.create_post);   
+router.post('/new', ticket_controller.create_post);   
 
 export default router;
